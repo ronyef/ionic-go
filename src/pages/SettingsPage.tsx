@@ -14,7 +14,7 @@ const SettingsPage: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar color="secondary">
           <IonTitle>Settings</IonTitle>
         </IonToolbar>
       </IonHeader>

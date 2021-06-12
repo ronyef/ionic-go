@@ -1,4 +1,4 @@
-package org.example.dailymoments;
+package cc.cod.skuter;
 
 import android.os.Bundle;
 

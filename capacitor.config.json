@@ -1,6 +1,6 @@
 {
-  "appId": "org.example.dailymoments",
-  "appName": "Daily Moments",
+  "appId": "cc.cod.skuter",
+  "appName": "COD Skuter",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",
@@ -9,9 +9,5 @@
       "launchAutoHide": false
     }
   },
-  "cordova": {},
-  "server": {
-    "url": "http://192.168.1.8:8100",
-    "cleartext": true
-  }
+  "cordova": {}
 }

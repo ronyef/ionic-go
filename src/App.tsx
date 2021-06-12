@@ -17,7 +17,7 @@ import RegisterPage from "./pages/RegisterPage";
 const App: React.FC = () => {
   const { loading, auth }= useAuthInit()
 
-  console.log("rendering App with loggedIn = " + auth);
+  // console.log("rendering App with loggedIn = " + auth);
 
   if (loading) {
     return <IonLoading isOpen />

@@ -28,7 +28,7 @@ async function savePicture(blobUrl, userId) {
   const blob = await response.blob()
   const snapshot = await pictureRef.put(blob)
   const url = await snapshot.ref.getDownloadURL()
-  console.log('saved picture', url)
+  // console.log('saved picture', url)
   return url
 }
 
