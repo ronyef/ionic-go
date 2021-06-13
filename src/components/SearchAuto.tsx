@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useImperativeHandle, forwardRef } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+import EventEmitter from "../utils/EventEmitter";
 
 interface Address {
     label: string
@@ -11,52 +12,58 @@ export interface LatLng {
   lng: number;
 }
 
-const SearchAuto = forwardRef((props: any, ref) => {
-  useImperativeHandle(
-    ref,
-    () => ({
-      refresh() {
-        if (rgpa && rgpa.current) {
-          rgpa.current.refreshSessionToken();
-        }
-      }
-    })
-
-    
-  )
-
+const SearchAuto = (props: any) => {
+ 
+  const [disableSearch, setDisableSearch] = useState(false)
   const [value, setValue] = useState<Address>();
   const { setDestination  } = props
-  const bounds: [LatLng, LatLng] = props.bounds
+  // const bounds: [LatLng, LatLng] = props.bounds
   const rgpa = useRef(null);
+
+  const depokBounds: [LatLng, LatLng] = [
+    { lat: -6.366, lng: 106.722 },
+    { lat: -6.466, lng: 106.894 },
+  ];
+
+  const sangattaBounds: [LatLng, LatLng] = [
+    { lat: 0.314, lng: 117.285 },
+    { lat: 0.608, lng: 117.685 },
+  ];
 
   useEffect(() => {
       setDestination(value)
-      console.log(value)
   }, [value])
+
+  useEffect(() => {
+    const enableSearchSubscribe = EventEmitter.addListener('onOrderActive', (active: boolean) => {
+      setDisableSearch(active)
+    })
+    return () => {
+      enableSearchSubscribe.remove()
+    }
+  }, [])
 
   return (
     <div>
       <GooglePlacesAutocomplete
         selectProps={{
           value,
-          onChange: setValue
+          onChange: setValue,
+          isDisabled: disableSearch
         }}
         apiKey={process.env.REACT_APP_GMAP_API_KEY}
         minLengthAutocomplete={3}
         autocompletionRequest={{
-            // location: {lat: 0.49524, lng: 117.53004},
             componentRestrictions: {
                 country: "id"
             },
-            // radius: 15000,
-            bounds: bounds,
+            bounds: depokBounds,
             // types: ['geocode'],
         }}
         
       />
     </div>
   );
-})
+}
 
 export default SearchAuto

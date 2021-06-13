@@ -6,39 +6,6 @@ import Location from '../Interfaces/Location'
 
 const  MapComponent = withScriptjs(withGoogleMap((props: any) => {
 
-    let refs = {}
-    const [position, setPosition]: any = useState()
-    const { bound, center, destination } = props
-
-    useEffect(() => {
-        setPosition({
-            bounds: null,
-            center: props.center,
-            markers: []
-        })
-    }, [])
-
-    return (
-        <>
-            <GoogleMap
-                defaultZoom={props.zoom}
-                defaultCenter={center}
-                options={{
-                    streetViewControl: false,
-                    mapTypeControl: false,
-                    restriction: {
-                        latLngBounds: {north: bound.north, south: bound.south, west: bound.west, east: bound.east},
-                        strictBounds: true
-                    }
-                }}
-            >
-                <Marker position={{ lat: -34.397, lng: 150.644 }} />
-            </GoogleMap>
-        </>
-    )
-}))
-
-export default function Map(props: any) {
     const sangataBounds = {
         north: 0.608,
         south: 0.314,
@@ -55,6 +22,41 @@ export default function Map(props: any) {
 
     const sangataCenter = { lat: 0.513878, lng: 117.536352 }
     const sawanganCenter = { lat: 6.41839, lng: 106.77940 }
+
+    let refs = {}
+    const [position, setPosition]: any = useState()
+    const { destination } = props
+
+    useEffect(() => {
+        setPosition({
+            bounds: null,
+            center: props.center,
+            markers: []
+        })
+    }, [])
+
+    return (
+        <>
+            <GoogleMap
+                defaultZoom={props.zoom}
+                defaultCenter={sawanganCenter}
+                options={{
+                    streetViewControl: false,
+                    mapTypeControl: false,
+                    restriction: {
+                        latLngBounds: depokBounds,
+                        strictBounds: true
+                    }
+                }}
+            >
+                <Marker position={{ lat: -34.397, lng: 150.644 }} />
+            </GoogleMap>
+        </>
+    )
+}))
+
+export default function Map(props: any) {
+    
     const zoom = 15
 
     const destination: Location = props.destination
@@ -66,8 +68,6 @@ export default function Map(props: any) {
                 loadingElement={<div style={{ height: `100%` }} />}
                 containerElement={<div style={{ height: `40vh` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
-                bound={depokBounds}
-                center={sawanganCenter}
                 zoom={zoom}
             />
         </div>
