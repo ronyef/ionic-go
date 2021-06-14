@@ -21,7 +21,7 @@ const  MapComponent = withScriptjs(withGoogleMap((props: any) => {
     }
 
     const sangataCenter = { lat: 0.513878, lng: 117.536352 }
-    const sawanganCenter = { lat: 6.41839, lng: 106.77940 }
+    const sawanganCenter = { lat: -6.41839, lng: 106.77940 }
 
     let refs = {}
     const [position, setPosition]: any = useState()
@@ -49,7 +49,10 @@ const  MapComponent = withScriptjs(withGoogleMap((props: any) => {
                     }
                 }}
             >
-                <Marker position={{ lat: -34.397, lng: 150.644 }} />
+                <Marker 
+                    position={{ lat: -34.397, lng: 150.644 }} 
+                    
+                />
             </GoogleMap>
         </>
     )

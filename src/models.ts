@@ -16,7 +16,7 @@ export interface OrderModel {
     destination: string
     origin: string
     originCoords: {
-        location: []
+        location: any
     }
     price: number
     status: string

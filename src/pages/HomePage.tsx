@@ -55,6 +55,7 @@ const HomePage = (props: any) => {
   const [isSending, setIsSending] = useState(false);
   const [isActiveOrder, setIsActiveOrder] = useState(false);
   const [bidPrice, setBidPrice] = useState(20000)
+  // const [activeOrder, setActiveOrder] = useState()
 
 
   const handleOrigin = (e) => {
@@ -125,8 +126,13 @@ const HomePage = (props: any) => {
 
   useEffect(() => {
     getCurrentPosition();
-    const orderListener = EventEmitter.addListener('onOrderActive', (active: boolean) => {
-      setIsActiveOrder(active)
+    const orderListener = EventEmitter.addListener('onOrderActive', (activeOrders: any[]) => {
+      if (activeOrders.length > 0) { 
+        setIsActiveOrder(true)
+        // setActiveOrder(activeOrders[0])
+        // console.log('activeOrder', activeOrder)
+      }
+       else {setIsActiveOrder(false)}
     })
     return () => {
       orderListener.remove()
@@ -147,7 +153,9 @@ const HomePage = (props: any) => {
   return (
     <IonPage>
       <IonContent>
-        <IonImg src="assets/atur.png" alt="atur aja" />
+        <div style={{minHeight: '1px !important'}}>
+          <img src="assets/atur.png" alt="atur"/>
+        </div>
         <div className="ion-padding">
           <IonItem lines="none">
             <IonLabel>Dari posisimu sekarang?</IonLabel>
