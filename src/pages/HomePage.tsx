@@ -55,7 +55,6 @@ const HomePage = (props: any) => {
   const [isSending, setIsSending] = useState(false);
   const [isActiveOrder, setIsActiveOrder] = useState(false);
   const [bidPrice, setBidPrice] = useState(20000)
-  // const [activeOrder, setActiveOrder] = useState()
 
 
   const handleOrigin = (e) => {
@@ -128,11 +127,10 @@ const HomePage = (props: any) => {
     getCurrentPosition();
     const orderListener = EventEmitter.addListener('onOrderActive', (activeOrders: any[]) => {
       if (activeOrders.length > 0) { 
-        setIsActiveOrder(true)
-        // setActiveOrder(activeOrders[0])
-        // console.log('activeOrder', activeOrder)
+        setIsActiveOrder(prev => prev = true)
       }
-       else {setIsActiveOrder(false)}
+       else {setIsActiveOrder(prev => prev = false)}
+       console.log(isActiveOrder, activeOrders)
     })
     return () => {
       orderListener.remove()
@@ -150,6 +148,7 @@ const HomePage = (props: any) => {
     }
   }, [isCurrentLocation]);
 
+
   return (
     <IonPage>
       <IonContent>
@@ -163,6 +162,7 @@ const HomePage = (props: any) => {
               checked={isCurrentLocation}
               onIonChange={onCurrentLocChange}
               color="success"
+              disabled={isActiveOrder}
             />
           </IonItem>
           {!isCurrentLocation && (
@@ -229,7 +229,7 @@ const HomePage = (props: any) => {
                   </IonText>
                 </div>
                 <div style={{marginBottom: '10px'}}>
-                <IonSegment color="danger" mode='ios' onIonChange={priceSet}>
+                <IonSegment color="danger" mode='ios' onIonChange={priceSet} disabled={isActiveOrder}>
                   <IonSegmentButton value='10k'>10 Ribu</IonSegmentButton>
                   <IonSegmentButton value='15k'>15 Ribu</IonSegmentButton>
                   <IonSegmentButton value='20k'>20 Ribu</IonSegmentButton>

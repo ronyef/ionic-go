@@ -35,8 +35,13 @@ const SearchAuto = (props: any) => {
   }, [value])
 
   useEffect(() => {
-    const enableSearchSubscribe = EventEmitter.addListener('onOrderActive', (active: boolean) => {
-      setDisableSearch(active)
+    const enableSearchSubscribe = EventEmitter.addListener('onOrderActive', (activeOrders: any[]) => {
+      if (activeOrders.length > 0) {
+        setDisableSearch(true)
+      } else {
+        setDisableSearch(false)
+      }
+      
     })
     return () => {
       enableSearchSubscribe.remove()

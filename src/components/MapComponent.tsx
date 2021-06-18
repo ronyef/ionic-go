@@ -69,7 +69,9 @@ const MapLayout = (props) => {
         streetViewControl: false,
         restriction: {
           latLngBounds: depokBounds
-        }
+        },
+        mapTypeControl: false,
+        draggable: true
       }}
       ref={mapRef}
     >

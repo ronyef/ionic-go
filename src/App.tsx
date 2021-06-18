@@ -35,10 +35,10 @@ const App: React.FC = () => {
               <Route exact path="/login">
                 <LoginPage />
               </Route>
-              <Route path="/my">
+              <Route exact path="/my">
                 <AppTabs />
               </Route>
-              <Redirect exact path="/" to="/my" />
+              <Redirect exact path="/" to="/my/entries" />
               <NotFoundPage />
             </Switch>
           </IonRouterOutlet>

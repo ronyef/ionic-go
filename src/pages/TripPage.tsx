@@ -50,7 +50,7 @@ const TripPage = () => {
   useEffect(() => {
     let activeOrders = []
     orders.map((order) => {
-      if (order.status === 'order' || order.status === 'tunggu') {
+      if (order.status === 'order' || order.status === 'tunggu' || order.status === 'jalan') {
         activeOrders.push(order)
       }
     })
@@ -76,7 +76,7 @@ const TripPage = () => {
             />
           </IonItem>
           {orders.map((order) => {
-              if (order.status === 'order' || order.status === 'tunggu') {
+              if (order.status === 'order' || order.status === 'tunggu' || order.status === 'jalan') {
                 return (
                   <div key={order.id} style={{marginBottom: '20px'}}>
                   <Order order={order}/>

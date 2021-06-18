@@ -18,7 +18,7 @@ export default function Order(props: any) {
   return (
     <div>
       <IonCard color="light">
-        <IonCardHeader color={status === 'order'? "light": status === 'tunggu'? "secondary": "success" }>
+        <IonCardHeader color={status === 'order'? "light": status === 'tunggu'? "secondary": status === "jalan"? "warning": "success" }>
           <IonCardSubtitle>{dayjs(dateTime.toDate().toString()).format('D MMM YYYY HH:mm')}</IonCardSubtitle>
           <IonCardTitle>{status === 'selesai'? "History" : "Active" } Order</IonCardTitle>
         </IonCardHeader>
